@@ -99,15 +99,15 @@ const Advice = () => {
   // };
 
   return (
-    <div className="bg-gray-800 w-full h-screen flex justify-center items-center font-signature">
-      <div className="relative flex flex-col justify-center items-center gap-4 bg-gray-700 text-slate-300 p-6 sm:p-8 rounded-lg max-w-xs md:max-w-md lg:max-w-lg">
-        <div className="text-emerald-300 mb-4">
-          <p>
+    <div className="bg-dark-blue w-full h-screen flex justify-center items-center font-signature">
+      <div className="relative flex flex-col justify-center items-center gap-4 bg-dark-grayish-blue text-light-cyan p-6 sm:p-8 rounded-lg max-w-xs md:max-w-lg lg:max-w-xl">
+        <div>
+          <p className="text-neon-green mb-2 text-xs font-semibold tracking-[0.2rem]">
             ADVICE # <span id="advice-id">{adviceId}</span>
           </p>
         </div>
         <div>
-          <p className="text-xl text-center sm:text-base md:text-2xl mb-4">
+          <p className="text-xl text-center sm:text-base md:text-3xl mb-4">
             {advice}
           </p>
         </div>
@@ -126,7 +126,7 @@ const Advice = () => {
         <div className="absolute bottom-0 flex justify-center w-full">
           <button
             onClick={changeAdvice}
-            className="bg-emerald-300 w-14 h-14 rounded-full flex justify-center items-center -mb-7 shadow-lg  hover:shadow-2xl transition-shadow duration-200"
+            className="bg-neon-green w-14 h-14 rounded-full flex justify-center items-center -mb-7 shadow-lg hover:shadow-2xl transition-shadow duration-200"
           >
             <img src={buttonIcon} alt="icon-dice" />
           </button>
