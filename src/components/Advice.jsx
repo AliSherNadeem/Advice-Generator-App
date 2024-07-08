@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import mobileDivider from "../assets/pattern-divider-mobile.svg";
-import desktopDivider from "../assets/pattern-divider-desktop.svg";
-import buttonIcon from "../assets/icon-dice.svg";
+import PatternDividerMobile from "../assets/icons/PatternDividerMobile";
+import PatternDividerDesktop from "../assets/icons/PatternDividerDesktop";
+import IconDice from "../assets/icons/IconDice";
 
 const Advice = () => {
   // const [adviceId, setAdviceId] = useState(null);
   // const [advice, setAdvice] = useState("");
   const BASE_URL = process.env.REACT_APP_BASE_URL;
-  console.log("Base URl", BASE_URL);
+
   const fetchAdvice = async () => {
     const response = await axios.get(BASE_URL);
     return response.data.slip;
@@ -130,23 +130,19 @@ const Advice = () => {
           </p>
         </div>
         <div className="mb-6">
-          <img
-            src={mobileDivider}
-            alt="pattern-divider-mobile"
-            className="block md:hidden"
-          />
-          <img
-            src={desktopDivider}
-            alt="pattern-divider-desktop"
-            className="hidden md:block"
-          />
+          <div className="block md:hidden">
+            <PatternDividerMobile />
+          </div>
+          <div className="hidden md:block">
+            <PatternDividerDesktop />
+          </div>
         </div>
         <div className="absolute bottom-0 flex justify-center w-full">
           <button
             onClick={changeAdvice}
-            className="bg-neon-green w-14 h-14 rounded-full flex justify-center items-center -mb-7 shadow-lg hover:shadow-2xl transition-shadow duration-200"
+            className="bg-neon-green w-14 h-14 rounded-full flex justify-center items-center -mb-7  hover:shadow-neon-green-light-hover transition-shadow duration-300"
           >
-            <img src={buttonIcon} alt="icon-dice" />
+            <IconDice />
           </button>
         </div>
       </div>

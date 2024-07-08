@@ -14,6 +14,9 @@ module.exports = {
     fontFamily: {
       signature: ["Manrope", "sans-serif"],
     },
+    boxShadow: {
+      "neon-green-light-hover": "0 0 20px rgba(51, 197, 124, 0.8)",
+    },
   },
   plugins: [],
 };
