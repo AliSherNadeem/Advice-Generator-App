@@ -1,36 +1,54 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import mobileDivider from "../assets/pattern-divider-mobile.svg";
 import desktopDivider from "../assets/pattern-divider-desktop.svg";
 import buttonIcon from "../assets/icon-dice.svg";
 
 const Advice = () => {
-  const [adviceId, setAdviceId] = useState(null);
-  const [advice, setAdvice] = useState("");
+  // const [adviceId, setAdviceId] = useState(null);
+  // const [advice, setAdvice] = useState("");
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  console.log("Base URl", BASE_URL);
+  const fetchAdvice = async () => {
+    const response = await axios.get(BASE_URL);
+    return response.data.slip;
+  };
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ["advice"],
+    queryFn: fetchAdvice,
+  });
+
+  const changeAdvice = () => {
+    refetch();
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   // simple fetch method
 
-  useEffect(() => {
-    fetch("https://api.adviceslip.com/advice")
-      .then((response) => response.json())
-      .then((data) => {
-        setAdviceId(data.slip.id);
-        setAdvice(data.slip.advice);
-      })
-      .catch((error) => console.error("Error in fetching advice : ", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://api.adviceslip.com/advice")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setAdviceId(data.slip.id);
+  //       setAdvice(data.slip.advice);
+  //     })
+  //     .catch((error) => console.error("Error in fetching advice : ", error));
+  // }, []);
 
-  //  simple fetch method
+  // //  simple fetch method
 
-  const changeAdvice = () => {
-    fetch("https://api.adviceslip.com/advice")
-      .then((response) => response.json())
-      .then((data) => {
-        setAdviceId(data.slip.id);
-        setAdvice(data.slip.advice);
-      })
-      .catch((error) => console.error("Error fetching advice:", error)); // Handle any errors
-  };
+  // const changeAdvice = () => {
+  //   fetch("https://api.adviceslip.com/advice")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setAdviceId(data.slip.id);
+  //       setAdvice(data.slip.advice);
+  //     })
+  //     .catch((error) => console.error("Error fetching advice:", error)); // Handle any errors
+  // };
 
   // //   fetch method with async and await
 
@@ -103,12 +121,12 @@ const Advice = () => {
       <div className="relative flex flex-col justify-center items-center gap-4 bg-dark-grayish-blue text-light-cyan p-6 sm:p-8 rounded-lg max-w-xs md:max-w-lg lg:max-w-xl">
         <div>
           <p className="text-neon-green mb-2 text-xs font-semibold tracking-[0.2rem]">
-            ADVICE # <span id="advice-id">{adviceId}</span>
+            ADVICE # <span id="advice-id">{data.id}</span>
           </p>
         </div>
         <div>
           <p className="text-xl text-center sm:text-base md:text-3xl mb-4">
-            {advice}
+            {data.advice}
           </p>
         </div>
         <div className="mb-6">
